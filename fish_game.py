@@ -14,10 +14,14 @@ class Fish:
         self.on_rod = None
 
     def take_bait(self, rod):
-        if self.hunger >= 0:    #fish will always take bait in this setting
+        if self.hunger >= 9:    #fish will always not take bait in this setting
             print(f"*** A {self.species.upper()} has taken the bait! ***\n")
             self.on_rod = rod 
             rod.fish = self  #not sure what this is doing
+        else:
+            Rod.cast_again()      #how to run conditional "cast_again" method here
+            self.on_rod = rod
+            rod.fish = self
 
     def got_away(self, rod):
         if self.size > self.on_rod.length:
@@ -45,6 +49,14 @@ class Rod:
 
     def cast_rod(self):
         print(f"You cast your {self.name} rod.")
+    
+    def cast_again(self):
+        recast = int(input(f"A {self.fish.species} looked at your bait but swam away.\n\nCast again?\n1 - Yes\n2 - No\n"))
+        if recast == 1:
+            exit()          #how to loop back to cast_rod
+        elif recast == 2:
+            print("Ok bye!")
+            exit()
 
     def break_rod(self):
         if self.fish.size > self.flex:
@@ -82,13 +94,15 @@ Choose your rod, type 1-4:
 3 - Mickey Mouse
 4 - Fiber Glass
 """)) - 1
+
+
 #============================================
 
 rods[rod_input].cast_rod()          #choose your own rod
 
 starttime = time.time()
 i = 0       #random seconds count bewtween 0-3 for impression of waiting for a fish to take bait
-while i <= random.randint(0, 3):
+while i <= random.randint(0, 1):
     print(".")
     time.sleep(1.0 - ((time.time() - starttime) % 1.0))
     i += 1
@@ -96,13 +110,16 @@ while i <= random.randint(0, 3):
 random_fish = random.randint(0, 5)   # chooses a random fish between index 0 -5 from the above list of fish
 
 fishes[random_fish].take_bait(rods[rod_input])     #random fish takes bait or doesnt take bait, reel slowly or quickly
+
+# rods[rod_input].cast_again()                #cast again branch
+
 rods[rod_input].reel_rod()                         #increase or decrease flex based on input
 
 # print(rods[rod_input].flex)       #flex increasing or decreasing properly
 
 starttime = time.time()
 i = 0       #random seconds count bewtween 0-2 for impression of reeling the fish in
-while i <= random.randint(1, 3):
+while i <= random.randint(1, 1):
     print(".")
     time.sleep(1.0 - ((time.time() - starttime) % 1.0))
     i += 1
