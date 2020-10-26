@@ -1,5 +1,7 @@
 import random
 
+start_over = False
+
 class Fish:
     def __init__(self, species, size, feistiness,hunger = random.randint(0, 8)):
         self.species = species
@@ -9,18 +11,18 @@ class Fish:
         self.on_rod = None
 
     def take_bait(self, rod):
-        if self.hunger >= 0:    #fish will always not take bait in this setting
+        if self.hunger >= 2:    #fish will always not take bait in this setting
             print(f"*** A {self.species.upper()} has taken the bait! ***\n")
             self.on_rod = rod 
             rod.fish = self  #not sure what this is doing
         else:
-            print(f"***The {self.species.upper()} got away. ***")
+            print(f"***The {self.species.upper()} was not hungry and got away. ***")
             exit()
 
     def got_away(self, rod):
+        self.on_rod = rod 
         if self.size > self.on_rod.length:
             print(f"The {self.species} got away!")
-            self.on_rod = rod 
             rod.fish = self  #not sure what this is doing
             exit()
 
@@ -34,7 +36,7 @@ class Fish:
             print(f"Your {self.species} got away. That fish was too feisty!")
             exit()
 
-fish1 = Fish("Minnow", 1, 3)    #species, size, fiestiness, hunger randomized and not shown
+fish1 = Fish("Minnow", 1, 1)    #species, size, fiestiness, hunger randomized and not shown
 fish2 = Fish("Perch", 3, 2)
 fish3 = Fish("Catfish", 8, 2)
 fish4 = Fish("Smallmouth Bass", 6, 5)

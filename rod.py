@@ -31,6 +31,6 @@ class Rod:
 rod1 = Rod("Cane Pole", 4, 6)       #type, flex, length
 rod2 = Rod("Carbon Fiber", 9, 8)
 rod3 = Rod("Mickey Mouse", 2, 1)  #flex is 2
-rod4 = Rod("Fiberglass", 6, 5)
+rod4 = Rod("Fiberglass", 5, 6)
 
 rods = [rod1, rod2, rod3, rod4]
